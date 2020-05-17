@@ -1,4 +1,4 @@
-Notifier
+9Pay Analytic
 =======================
 
 This package send notifications. Package is allowing send notifications with firebase, telegram, twilio,...
@@ -8,7 +8,7 @@ This package send notifications. Package is allowing send notifications with fir
 Install MakeResource through Composer.
 
     "require": {
-        "onesite/notifier": "~1.0"
+        "onesite/ninepay-analytic": "~1.0"
     }
     
 ## Using the package
@@ -18,13 +18,10 @@ Install MakeResource through Composer.
     <?php
 
     use GuzzleHttp\Psr7\Response;
-    use OneSite\Notifier\Firebase;
     
+    $service = new OneSite\NinePay\Analytic\Analytic();  
+
     /**
      * @var Response $response
      */
-    $response = $this->notify->send(env('NOTIFIER_FIREBASE_TO_DEVICE'), [
-        'title' => 'Test send to Device',
-        'description' => 'Test send to Device',
-        'type' => 'test_device'
-    ]);    
+    $response = $this->service->log($params);
