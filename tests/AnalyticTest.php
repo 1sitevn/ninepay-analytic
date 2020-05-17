@@ -216,4 +216,36 @@ class AnalyticTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());;
     }
+
+    /**
+     * PHPUnit test: vendor/bin/phpunit --filter testGetTopService tests/AnalyticTest.php
+     */
+    public function testGetTopService()
+    {
+        $params = [];
+
+        /**
+         * @var Response $response
+         */
+        $response = $this->service->getTopServices('transaction_payment', $params);
+
+        $this->assertEquals(200, $response->getStatusCode());;
+    }
+
+    /**
+     * PHPUnit test: vendor/bin/phpunit --filter testGetTopServiceWithUserId tests/AnalyticTest.php
+     */
+    public function testGetTopServiceWithUserId()
+    {
+        $params = [
+            'user_id' => 43
+        ];
+
+        /**
+         * @var Response $response
+         */
+        $response = $this->service->getTopServices('transaction_payment', $params);
+
+        $this->assertEquals(200, $response->getStatusCode());;
+    }
 }

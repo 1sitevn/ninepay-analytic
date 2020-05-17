@@ -72,6 +72,24 @@ class Analytic
     }
 
     /**
+     * @param $logType
+     * @param array $params
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getTopServices($logType, array $params = [])
+    {
+        return $this->client->request('GET', $this->getApiUrl() . "/v1/log/" . $logType . "/top-services", [
+            'http_errors' => false,
+            'verify' => false,
+            'headers' => [
+                "Api-Key" => $this->getSignature($params)
+            ],
+            'query' => $params
+        ]);
+    }
+
+
+    /**
      * @param array $params
      * @return \Psr\Http\Message\ResponseInterface
      */
