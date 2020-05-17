@@ -13,7 +13,7 @@ Install MakeResource through Composer.
     
 ## Using the package
 
-### Send notification with Firebase
+### Log data to 9Pay
 
     <?php
 
