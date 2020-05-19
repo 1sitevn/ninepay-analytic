@@ -214,7 +214,7 @@ class OrderTest extends TestCase
          * @var Response $response
          */
         $response = $this->service->logOrder($params);
-var_dump($response->getBody()->getContents());
+
         $this->assertEquals(200, $response->getStatusCode());;
     }
 
