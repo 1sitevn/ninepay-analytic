@@ -106,6 +106,22 @@ class Analytic
     }
 
     /**
+     * @param array $params
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function logOrder(array $params = [])
+    {
+        return $this->client->request('POST', $this->getApiUrl() . "/v1/log/order", [
+            'http_errors' => false,
+            'verify' => false,
+            'headers' => [
+                "Api-Key" => $this->getSignature($params)
+            ],
+            'form_params' => $params
+        ]);
+    }
+
+    /**
      * @param $params
      * @return string
      */
