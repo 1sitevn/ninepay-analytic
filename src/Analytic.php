@@ -88,6 +88,21 @@ class Analytic
         ]);
     }
 
+    /**
+     * @param array $params
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function getTopOrderServices(array $params = [])
+    {
+        return $this->client->request('GET', $this->getApiUrl() . "/v1/log/order/top-services", [
+            'http_errors' => false,
+            'verify' => false,
+            'headers' => [
+                "Api-Key" => $this->getSignature($params)
+            ],
+            'query' => $params
+        ]);
+    }
 
     /**
      * @param array $params

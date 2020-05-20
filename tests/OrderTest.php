@@ -218,4 +218,21 @@ class OrderTest extends TestCase
         $this->assertEquals(200, $response->getStatusCode());;
     }
 
+    /**
+     * PHPUnit test: vendor/bin/phpunit --filter getTopOrderServices tests/OrderTest.php
+     */
+    public function testGetTopService()
+    {
+        $params = [
+            'limit' => 2
+        ];
+
+        /**
+         * @var Response $response
+         */
+        $response = $this->service->getTopOrderServices($params);
+
+        $this->assertEquals(200, $response->getStatusCode());;
+    }
+
 }
