@@ -219,9 +219,9 @@ class OrderTest extends TestCase
     }
 
     /**
-     * PHPUnit test: vendor/bin/phpunit --filter getTopOrderServices tests/OrderTest.php
+     * PHPUnit test: vendor/bin/phpunit --filter testGetSuggestServices tests/OrderTest.php
      */
-    public function testGetTopService()
+    public function testGetSuggestTools()
     {
         $params = [
             'limit' => 2
@@ -230,9 +230,25 @@ class OrderTest extends TestCase
         /**
          * @var Response $response
          */
-        $response = $this->service->getTopOrderServices($params);
+        $response = $this->service->getSuggestTools($params);
 
         $this->assertEquals(200, $response->getStatusCode());;
     }
 
+    /**
+     * PHPUnit test: vendor/bin/phpunit --filter testGetSuggestServices tests/OrderTest.php
+     */
+    public function testGetSuggestServices()
+    {
+        $params = [
+            'limit' => 2
+        ];
+
+        /**
+         * @var Response $response
+         */
+        $response = $this->service->getSuggestServices($params);
+
+        $this->assertEquals(200, $response->getStatusCode());;
+    }
 }
