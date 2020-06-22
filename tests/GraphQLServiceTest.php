@@ -71,6 +71,19 @@ class GraphQLServiceTest extends TestCase
 
         $data = $this->service->query($query, [
             'user_id' => 43
+        ], [
+            'Device-ID' => uniqid(),
+            'Device-Name' => 'TungNT',
+            'Device-Model' => 'Xiaomi Red Mi Note 8 Pro',
+            'Platform' => 'Android',
+            'OS' => 'Android 1.1',
+            'Browser-Name' => 'Chrome',
+            'IP-Address' => '35.247.128.96',
+            'User-Agent' => 'PostmanRuntime/7.25.0',
+            'Firebase-Token' => base64_encode(uniqid()),
+            'Network' => 'WIFI',
+            'Object-ID' => 0,
+            'Object-Type' => 'get_orders',
         ]);
 
         echo "\n" . json_encode($data);
