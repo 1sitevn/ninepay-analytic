@@ -8,8 +8,6 @@ use GuzzleHttp\Psr7\Response;
 use OneSite\NinePay\Analytic\Analytic;
 use PHPUnit\Framework\TestCase;
 
-require_once "helpers.php";
-
 /**
  * Class AnalyticTest
  * @package OneSite\NinePay\Analytic\Tests

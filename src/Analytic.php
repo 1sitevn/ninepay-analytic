@@ -35,8 +35,8 @@ class Analytic
     {
         $this->client = new Client();
 
-        $this->apiUrl = Config::get('analytic.api_url');
-        $this->apiSecret = Config::get('analytic.api_secret');
+        $this->apiUrl = config('analytic.api_url');
+        $this->apiSecret = config('analytic.api_secret');
     }
 
     /**
@@ -75,6 +75,7 @@ class Analytic
      * @param $logType
      * @param array $params
      * @return \Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getTopServices($logType, array $params = [])
     {
@@ -91,6 +92,7 @@ class Analytic
     /**
      * @param array $params
      * @return \Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getSuggestServices(array $params = [])
     {
@@ -104,9 +106,11 @@ class Analytic
         ]);
     }
 
+
     /**
      * @param array $params
      * @return \Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getSuggestTools(array $params = [])
     {
@@ -123,6 +127,7 @@ class Analytic
     /**
      * @param array $params
      * @return \Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function log(array $params = [])
     {
@@ -139,6 +144,7 @@ class Analytic
     /**
      * @param array $params
      * @return \Psr\Http\Message\ResponseInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function logOrder(array $params = [])
     {

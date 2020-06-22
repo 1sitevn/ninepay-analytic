@@ -11,7 +11,8 @@
   ],
   "require": {
     "php": "^7.1",
-    "guzzlehttp/guzzle": "^6.5"
+    "guzzlehttp/guzzle": "^6.5",
+    "onesite/core": "^1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^8.0"
@@ -22,6 +23,9 @@
     }
   },
   "autoload-dev": {
+    "files": [
+      "helpers.php"
+    ],
     "psr-4": {
       "OneSite\\NinePay\\Analytic\\Tests\\": "tests"
     }
