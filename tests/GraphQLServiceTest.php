@@ -47,7 +47,7 @@ class GraphQLServiceTest extends TestCase
     public function testMutation()
     {
         $query = 'mutation{
-            storeEvent(
+            event(
                 type: "login", 
                 label: "Login",
                 device_id: "9PAYTEST0001",
