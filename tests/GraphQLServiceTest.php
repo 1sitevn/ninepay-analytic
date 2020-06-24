@@ -42,21 +42,78 @@ class GraphQLServiceTest extends TestCase
     }
 
     /**
+     * PHPUnit test: vendor/bin/phpunit --filter testMutation tests/GraphQLServiceTest.php
+     */
+    public function testMutation()
+    {
+        $query = 'mutation{
+            storeEvent(
+                type: "login", 
+                label: "Login",
+                device_id: "9PAYTEST0001",
+                device_name: "TungNT",
+                device_model: "Xiaomi redme note 8 pro",
+                platform: "Android",
+                os: "Android 11.10",
+                browser_name: "Chrome 83.24.11",
+                user_agent: "PostmanRuntime/7.25.0",
+                ip: "35.247.128.96",
+                object_id: "43",
+                object_type: "login",
+                user_id: "43",
+                user_phone: "0888523111"
+                network: "WIFI",
+                extra_data: ""
+            ) {
+                type
+                label
+                device_id
+                device_name
+                device_model
+                platform
+                os
+                browser_name
+                user_agent
+                ip
+                object_id
+                object_type
+                network
+                user_id
+                user_phone
+            }    
+        }';
+
+        $data = $this->service->query($query);
+
+        echo "\n" . json_encode($data);
+
+        $this->assertArrayNotHasKey('error', $data);
+    }
+
+    /**
      * PHPUnit test: vendor/bin/phpunit --filter testQuery tests/GraphQLServiceTest.php
      */
     public function testQuery()
     {
-        $query = 'query FetchOrders($user_id: Int!){
-          order(user_id: $user_id){
+        $query = 'query{
+          event(limit: 2){
             data{
-                order_id
-                amount
-                fee
-                discount
-                total
+                id
+                label
+                type
                 user_id
                 user_phone
-                card{type, price, image_url}
+                object_id
+                object_type
+                device_id
+                device_name
+                device_model
+                browser_name
+                ip
+                platform
+                network
+                os
+                user_agent
                 created_at(format:"H:i d/m/Y")
             },
             total,
@@ -69,22 +126,7 @@ class GraphQLServiceTest extends TestCase
           }
         }';
 
-        $data = $this->service->query($query, [
-            'user_id' => 43
-        ], [
-            'Device-ID' => uniqid(),
-            'Device-Name' => 'TungNT',
-            'Device-Model' => 'Xiaomi Red Mi Note 8 Pro',
-            'Platform' => 'Android',
-            'OS' => 'Android 1.1',
-            'Browser-Name' => 'Chrome',
-            'IP-Address' => '35.247.128.96',
-            'User-Agent' => 'PostmanRuntime/7.25.0',
-            'Firebase-Token' => base64_encode(uniqid()),
-            'Network' => 'WIFI',
-            'Object-ID' => 0,
-            'Object-Type' => 'get_orders',
-        ]);
+        $data = $this->service->query($query);
 
         echo "\n" . json_encode($data);
 

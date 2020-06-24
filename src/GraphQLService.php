@@ -74,31 +74,18 @@ class GraphQLService
     /**
      * @param $query
      * @param array $variables
-     * @param array $headers
      * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function query($query, $variables = [], $headers = [])
+    public function query($query, $variables = [])
     {
         $params = [
             'query' => $query,
             'variables' => $variables,
         ];
 
-        $defaultHeaders = [
-            'Api-Key' => $this->getSignature($params),
-            'Object-ID' => $this->getHeader('Object-ID'),
-            'Object-Type' => $this->getHeader('Object-Type'),
-            'Device-ID' => $this->getHeader('Device-ID'),
-            'Device-Name' => $this->getHeader('Device-Name'),
-            'Device-Model' => $this->getHeader('Device-Model'),
-            'Browser-Name' => $this->getHeader('Browser-Name'),
-            'IP-Address' => $this->getHeader('IP-Address'),
-            'Firebase-Token' => $this->getHeader('Firebase-Token'),
-            'Platform' => $this->getHeader('Platform'),
-            'Network' => $this->getHeader('Network'),
-            'OS' => $this->getHeader('OS'),
-            'User-Agent' => $this->getHeader('User-Agent')
+        $headers = [
+            'Api-Key' => $this->getSignature($params)
         ];
 
         /**
@@ -107,7 +94,7 @@ class GraphQLService
         $response = $this->client->request('POST', $this->getApiUrl() . "/graphql", [
             'http_errors' => false,
             'verify' => false,
-            'headers' => array_merge($defaultHeaders, $headers),
+            'headers' => $headers,
             'form_params' => $params
         ]);
 
@@ -125,16 +112,6 @@ class GraphQLService
         return [
             'data' => $responseContent
         ];
-    }
-
-    /**
-     * @param $key
-     * @param string $default
-     * @return mixed|string
-     */
-    private function getHeader($key, $default = '')
-    {
-        return !empty($_SERVER[$key]) ? $_SERVER[$key] : $default;
     }
 
     /**
