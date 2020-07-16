@@ -74,18 +74,22 @@ class GraphQLService
     /**
      * @param $query
      * @param array $variables
+     * @param array $headers
      * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function query($query, $variables = [])
+    public function query($query, $variables = [], $headers = [])
     {
         $params = [
             'query' => $query,
             'variables' => $variables,
+            'hash' => md5(time())
         ];
 
-        $headers = [
-            'Api-Key' => $this->getSignature($params)
+        $defaultHeaders = [
+            'Api-Key' => $this->getSignature([
+                'hash' => $params['hash']
+            ])
         ];
 
         /**
@@ -94,7 +98,7 @@ class GraphQLService
         $response = $this->client->request('POST', $this->getApiUrl() . "/graphql", [
             'http_errors' => false,
             'verify' => false,
-            'headers' => $headers,
+            'headers' => array_merge($defaultHeaders, $headers),
             'form_params' => $params
         ]);
 
@@ -112,6 +116,16 @@ class GraphQLService
         return [
             'data' => $responseContent
         ];
+    }
+
+    /**
+     * @param $key
+     * @param string $default
+     * @return mixed|string
+     */
+    private function getHeader($key, $default = '')
+    {
+        return !empty($_SERVER[$key]) ? $_SERVER[$key] : $default;
     }
 
     /**
